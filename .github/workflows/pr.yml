@@ -1,0 +1,41 @@
+name: Quality Assurance
+#on: pull_request, workflow_call]
+
+# Container for the app
+jobs:
+  quality-assurance:
+    name: Quality Assurance Job
+    runs-on: ubuntu-latest
+    container: python:3.12 #needs to be specified to the prod one
+
+# Container for the DB
+  services:
+    db:
+      image:
+      env:
+        POSTGRES_DB:
+        POSTGRES_USER:
+        POSTGRES_PASSWORD:
+
+# Steps for the job
+#  steps:
+#    - uses: actions/checkout@v2
+
+#    - name: Install Poetry # what's that?
+#      uses: abatilo/actions-poetry@v2.0.0
+#      with:
+#        poetry-version
+
+#    - name: Install Dependencies
+#      run: make install && make install-pre-commit
+#
+#    - name: Lint
+#      run: make lint
+
+#    - name: Test
+#      run: make test
+#### Function of this git action: ###
+# This yaml file will be triggered on pull requests and workflow calls (triggered by another workflow like
+# CICD or similar)
+
+# The job container will be run on ubuntu (similar to production)
