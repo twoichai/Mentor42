@@ -1,0 +1,30 @@
+vibrant with red and blue
+:root {
+  --color-main: #71c6dd;
+  --color-main-light: #e1f6fb;
+  --color-dark: #b3343b;
+  --color-dark-medium: #51546e;
+  --color-dark-light: #e85e61;
+  --color-light: #F5F5F5;
+  --color-gray: #8b8b8b;
+  --color-light-gray: #b2bdbd;
+  --color-bg: #102548;
+  --color-success: #5dd693;
+  --color-error: #fc4b0b;
+}
+
+vibrant orange dark blue
+
+:root {
+  --color-main: #ff6f61;        /* Vivid coral for a bold primary color */
+  --color-main-light: #ffd9d4; /* Soft pink for secondary elements */
+  --color-dark: #2b2d42;       /* Deep navy for strong contrast */
+  --color-dark-medium: #8d99ae; /* Medium slate for text and borders */
+  --color-dark-light: #edf2f4; /* Light gray for soft backgrounds */
+  --color-light: #ffffff;      /* Crisp white for text and highlights */
+  --color-gray: #a9a9a9;       /* Neutral gray for inactive elements */
+  --color-light-gray: #f1f1f1; /* Very light gray for subtle accents */
+  --color-bg: #1a202c;         /* Deep dark gray for a strong base */
+  --color-success: #0cca4a;    /* Neon green for success */
+  --color-error: #ff1744;      /* Bright neon red for errors */
+}
