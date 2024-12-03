@@ -64,13 +64,14 @@ def registerPage(request):
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
+
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
         Q(description__contains=q)
     )
 
-    topics = Topic.objects.all()
+    topics = Topic.objects.all()[0:5]
     room_count = rooms.count()
     #room_messages = Message.objects.all()[:5]
     # why i see everything in all?
@@ -187,3 +188,15 @@ def updateUser(request):
             form.save()
             return redirect('user-profile', pk=user.id)
     return render(request, 'base/update-user.html', context)
+
+
+def topicsPage(request):
+    q = request.GET.get('q') if request.GET.get('q') is not None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    context = {'topics': topics}
+    return render(request, 'base/topics.html', context)
+
+
+def activityPage(request):
+    room_messages = Message.objects.all()
+    return render(request, 'base/activity.html', {'room_messages': room_messages})
