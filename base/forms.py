@@ -12,7 +12,7 @@ class RoomForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['first_name', 'username', 'email']
 
 
 class UserDetailsForm(ModelForm):

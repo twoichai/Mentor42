@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import RoomForm, UserForm
+from .forms import RoomForm, UserForm, UserDetailsForm
 
 
 def loginPage(request):
@@ -73,7 +73,7 @@ def home(request):
 
     topics = Topic.objects.all()[0:5]
     room_count = rooms.count()
-    #room_messages = Message.objects.all()[:5]
+    # room_messages = Message.objects.all()[:5]
     # why i see everything in all?
 
     room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
@@ -137,7 +137,7 @@ def createRoom(request):
             topic=topic,
             description=request.POST.get('description')
         )
-    
+
         return redirect('home')
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
@@ -179,14 +179,25 @@ def deleteRoom(request, pk):
 @login_required(login_url='login')
 def updateUser(request):
     user = request.user
-    form = UserForm(instance=user)
-    context = {'form': form}
+    user_form = UserForm(instance=user)
+    user_details_form = UserDetailsForm(instance=user)
+    context = {'user_form': user_form, 'user_details_form': user_details_form}
 
     if request.method == 'POST':
-        form = UserForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('user-profile', pk=user.id)
+        if 'user_form_submit' in request.POST:
+            # Process the user form
+            user_form = UserForm(request.POST, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect('user-profile', pk=user.id)
+
+        if 'user_details_form_submit' in request.POST:
+            # Process the user details form
+            user_details_form = UserDetailsForm(request.POST, instance=user)
+            if user_details_form.is_valid():
+                user_details_form.save()
+                return redirect('user-profile', pk=user.id)
+
     return render(request, 'base/update-user.html', context)
 
 
