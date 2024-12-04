@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Room, User
+from .models import Room, User, UserDetails
 
 
 class RoomForm(ModelForm):
@@ -13,3 +13,10 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+
+
+class UserDetailsForm(ModelForm):
+    class Meta:
+        model = UserDetails
+        fields = '__all__'
+        exclude = ['is_online', 'is_verified', 'last_time_online', 'user', 'date_of_birth']
