@@ -19,4 +19,4 @@ class UserDetailsForm(ModelForm):
     class Meta:
         model = UserDetails
         fields = '__all__'
-        exclude = ['is_online', 'is_verified', 'last_time_online', 'user', 'date_of_birth']
+        exclude = ['is_online', 'is_verified', 'last_time_online', 'user', 'profile_picture', 'date_of_birth']

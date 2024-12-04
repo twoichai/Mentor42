@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .models import Room, Topic, Message
+from .models import Room, Topic, Message, UserDetails
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -180,7 +180,8 @@ def deleteRoom(request, pk):
 def updateUser(request):
     user = request.user
     user_form = UserForm(instance=user)
-    user_details_form = UserDetailsForm(instance=user)
+    details = UserDetails.objects.get(user=user)
+    user_details_form = UserDetailsForm(instance=details)
     context = {'user_form': user_form, 'user_details_form': user_details_form}
 
     if request.method == 'POST':
@@ -193,7 +194,7 @@ def updateUser(request):
 
         if 'user_details_form_submit' in request.POST:
             # Process the user details form
-            user_details_form = UserDetailsForm(request.POST, instance=user)
+            user_details_form = UserDetailsForm(request.POST, instance=details)
             if user_details_form.is_valid():
                 user_details_form.save()
                 return redirect('user-profile', pk=user.id)
