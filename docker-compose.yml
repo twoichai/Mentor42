@@ -6,14 +6,13 @@ services:
       context: .
     ports:
       - "8000:8000"
-    command: ["sh", "./start.sh"]
+    command: [ "sh", "./start.sh" ]
     volumes:
       - .:/app
     env_file:
       - .env
     depends_on:
       - postgres_db
-
 
   postgres_db:
     image: postgres

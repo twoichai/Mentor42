@@ -6,16 +6,16 @@ jobs:
   quality-assurance:
     name: Quality Assurance Job
     runs-on: ubuntu-latest
-    container: python:3.12 #needs to be specified to the prod one
+    container: python:3.12.7-slim-bullseye
 
 # Container for the DB
   services:
     db:
-      image:
+      image: postgres:latest
       env:
-        POSTGRES_DB:
-        POSTGRES_USER:
-        POSTGRES_PASSWORD:
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
 # Steps for the job
 #  steps:

@@ -5,9 +5,10 @@ ENV PYTHONDONTWRITEBYTECODE 1
 
 WORKDIR /app
 
-COPY . .
+COPY . /app/
 
 RUN apt-get update
 
+RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
