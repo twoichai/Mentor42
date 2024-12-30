@@ -1,17 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 :root {
-  --color-main: #f4a261;        /* Warm coral for primary accents */
-  --color-main-light: #fcdcbf; /* Soft peach for highlights or hover effects */
-  --color-dark: #463f3a;       /* Rich brown for text and borders */
-  --color-dark-medium: #6a5d53; /* Soft taupe for secondary text */
-  --color-dark-light: #857e78; /* Warm gray for subtle accents */
-  --color-light: #fefae0;      /* Off-white for main background or text */
-  --color-gray: #bcb7b1;       /* Warm gray for inactive elements */
-  --color-light-gray: #e5ded5; /* Light taupe-gray for dividers or backgrounds */
-  --color-bg: #2a2926;         /* Earthy dark brown for a grounded dark mode */
-  --color-success: #81c784;    /* Muted green for success states */
-  --color-error: #e76f51;      /* Warm red-orange for errors */
+  --color-main: #4d96ff; /* Cool, mid-tone blue */
+  --color-main-light: #95b8ff; /* Lighter, powder-blue accent */
+  --color-dark: #1a202c; /* Inky, indigo-tinged gray for text */
+  --color-dark-medium: #4a5568; /* Muted, steel-gray for secondary text */
+  --color-dark-light: #718096; /* Soft, slate-gray for accents */
+  --color-light: #f7fafc; /* Bright, snow-white for backgrounds */
+  --color-gray: #a0aec0; /* Cooler, pewter-gray for inactive elements */
+  --color-light-gray: #e2e8f0; /* Airy, powder-blue gray for dividers */
+  --color-bg: #171923; /* Deep, midnight-blue for dark mode */
+  --color-success: #48bb78; /* Bright, aqua-tinged green for success */
+  --color-error: #e53e3e; /* Bold, chili-red for errors */
 }
 
 

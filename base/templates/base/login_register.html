@@ -72,12 +72,27 @@
 
                         <form class="form" method="POST" action="">
                             {% csrf_token %}
-                            {% for field in form %}
-                                <div class="form__group form__group">
-                                    <label for="room_name">{{ field.label }}</label>
-                                    {{ field }}
-                                </div>
-                            {% endfor %}
+                            <div class="form__group form__group">
+                                <label for="room_name">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                            <div class="form__group form__group">
+                                <label for="room_name">{{ form.username.label }}</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form__group form__group">
+                                <label for="room_name">{{ form.email.label }}</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form__group form__group">
+                                <label for="room_name">{{ form.password1.label }}</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form__group form__group">
+                                <label for="room_name">{{ form.password2.label }}</label>
+                                {{ form.password2 }}
+                            </div>
+
 
                             <button class="btn btn--main" type="submit">
                                 <svg

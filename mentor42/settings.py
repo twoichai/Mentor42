@@ -67,23 +67,23 @@ WSGI_APPLICATION = 'mentor42.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('SQL_NAME', 'postgres'),
-        'USER': os.getenv('SQL_USER', 'postgres'),
-        'PASSWORD': os.getenv('SQL_PASSWORD', ''),
-        'HOST': os.getenv('SQL_HOST', 'localhost'),
-        'PORT': os.getenv('SQL_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#      'NAME': os.getenv('SQL_NAME', 'postgres'),
+#     'USER': os.getenv('SQL_USER', 'postgres'),
+#    'PASSWORD': os.getenv('SQL_PASSWORD', ''),
+#   'HOST': os.getenv('SQL_HOST', 'localhost'),
+#  'PORT': os.getenv('SQL_PORT', '5432'),
+# }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -127,7 +127,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Email Settings
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
@@ -135,3 +134,5 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT', 25))  # Default port for SMTP is 25
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False').lower() in ('true', '1', 't')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+
+PASSWORD_RESET_TIMEOUT = 900  # 15 minutes

@@ -10,3 +10,9 @@
 - email —> link for socials
 - filter to europe us
 - github actions integration : https://www.youtube.com/watch?v=YLC1hnqSluM
+
+
+# cicd
+- docker bilden --> hosten
+- (tests) + lint
+- argo cd

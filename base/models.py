@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 
+
 class Topic(models.Model):
     name = models.CharField(max_length=100)
 
@@ -55,6 +56,15 @@ class UserDetails(models.Model):
     bio = models.TextField(blank=True, null=True, max_length=500)
 
     profile_picture = models.ImageField(upload_to="profile_pictures/", blank=True, null=True)
+
+    # Social Media
+    github_profile = models.URLField(max_length=200, blank=True, null=True)
+    instagram_profile = models.URLField(max_length=200, blank=True, null=True)
+    linkedin_profile = models.URLField(max_length=200, blank=True, null=True)
+
+    # Mentor Program
+    looking_for_mentor = models.BooleanField(default=False)
+    mentor = models.BooleanField(default=False)
 
     # Interests (to be converted into tags later)
     interests = models.TextField(blank=True, null=True)  # Store as a comma-separated string for now
