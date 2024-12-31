@@ -28,9 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # added app
-    "base.apps.BaseConfig",
-    "chat.apps.ChatConfig"
+
+    # added apps
+    'base.apps.BaseConfig',
+    'django_countries'
 ]
 
 MIDDLEWARE = [

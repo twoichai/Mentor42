@@ -35,7 +35,8 @@
                         </p>
                         <h3>Interests</h3>
                         <p>
-                            {{ user.details.interests }}
+
+                            <img src="{{ user.details.get_country_flag }}" alt="{{ user.details.country.name }}" width="32" height="24">
                         </p>
                         <h3>Preferred Language</h3>
                         <p>
@@ -63,8 +64,6 @@
                         </p>
                     </div>
                 </div>
-
-
 
                 </div>
 

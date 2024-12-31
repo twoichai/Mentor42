@@ -73,5 +73,8 @@ class UserDetails(models.Model):
         verbose_name = "User detail"
         verbose_name_plural = "User details"
 
+    def get_country_flag(self):
+        return f'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/{self.country.code.lower()}.svg'
+
     def __str__(self):
         return f"Details of {self.user.username}"

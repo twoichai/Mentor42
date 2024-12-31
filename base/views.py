@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
 from django.contrib.auth import authenticate, login, logout, get_user_model
 
 from .forms import RoomForm, UserForm, UserDetailsForm, CustomUserCreationForm
@@ -46,7 +47,11 @@ def loginPage(request):
 
 
 def logoutUser(request):
+    username = request.user.username if request.user.is_authenticated else 'User'
     logout(request)
+    messages.success(request, mark_safe(
+        f"Logout was successful. See you soon, dear <b>{username}</b>!"
+    ))
     return redirect('home')
 
 
@@ -58,17 +63,16 @@ def activateEmail(request, user, to_email):
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
         "protocol": 'https' if request.is_secure() else 'http'
-
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f"Dear <b>{user}</b>, please go to your email <b>{to_email}</b> inbox and click on "
-                                  "received activation link to confirm and complete the registration. <b>Note:</b> "
-                                  "Check"
-                                  " your spam folder."
-                         )
+        messages.success(request, mark_safe(
+            f"Dear <b>{user.username}</b>, please go to your email <b>{to_email}</b> inbox and activate your account"
+        ))
     else:
-        messages.error(request, f'Problem sending email to {to_email}, check if the email is correct.')
+        messages.error(request, mark_safe(
+            f"Sending email to {to_email} failed. Please check if the email is correct."
+        ))
 
 
 def registerPage(request):
@@ -179,13 +183,16 @@ def createRoom(request):
         topic_name = request.POST.get('topic')
         topic, create = Topic.objects.get_or_create(name=topic_name)
 
+        room_name = request.POST.get('name')
         Room.objects.create(
             host=request.user,
             name=request.POST.get('name'),
             topic=topic,
             description=request.POST.get('description')
         )
-
+        messages.success(request, mark_safe(
+            f"Room <b>{room_name}</b> has been created"
+        ))
         return redirect('home')
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
@@ -214,12 +221,15 @@ def updateRoom(request, pk):
 @login_required(login_url='login')
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
-
+    room_name = room.name
     if request.user != room.host:
         return HttpResponse('You are not allowed here!')
 
     if request.method == 'POST':
         room.delete()
+        messages.info(request, mark_safe(
+            f"Room <b>{room_name}</b> has been deleted"
+        ))
         return redirect('home')
     return render(request, 'base/delete.html', {'obj': room})
 
@@ -238,6 +248,9 @@ def updateUser(request):
             user_form = UserForm(request.POST, instance=user)
             if user_form.is_valid():
                 user_form.save()
+                messages.success(request, mark_safe(
+                    f"Your profile has been successfully updated"
+                ))
                 return redirect('user-profile', pk=user.id)
 
         if 'user_details_form_submit' in request.POST:
@@ -245,6 +258,9 @@ def updateUser(request):
             user_details_form = UserDetailsForm(request.POST, instance=details)
             if user_details_form.is_valid():
                 user_details_form.save()
+                messages.success(request, mark_safe(
+                    f"Your profile has been successfully updated"
+                ))
                 return redirect('user-profile', pk=user.id)
 
     return render(request, 'base/update-user.html', context)
