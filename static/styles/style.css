@@ -12,6 +12,7 @@
   --color-bg: #171923; /* Deep, midnight-blue for dark mode */
   --color-success: #48bb78; /* Bright, aqua-tinged green for success */
   --color-error: #e53e3e; /* Bold, chili-red for errors */
+
 }
 
 
@@ -1237,3 +1238,140 @@ a:hover, .topics-page a:hover {
   text-decoration: underline;
 }
 
+.messages {
+    /* Reset list styling */
+    list-style: none;
+    padding: 0;
+
+    /* Responsive container styling */
+    width: min(90%, 48rem);
+    margin: 1.5rem auto;
+
+    /* Ensure container adjusts to content */
+    height: auto;
+    min-height: fit-content;
+
+    /* Container animation */
+    animation: slideInMessage 0.3s ease-out;
+}
+
+.messages li {
+    /* Shared Message item styling */
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
+    border-radius: 0.7rem;
+
+    /* Flexible text container */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+
+    /* Text styling */
+    font-family: "DM Sans", "Segoe UI", sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 500;
+
+    /* Text wrapping */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+
+    /* Individual message animation with delay */
+    animation: slideInItem 0.3s ease-out forwards;
+    opacity: 0;
+}
+
+/* Apply sequential delays to messages */
+.messages li:nth-child(1) { animation-delay: 0.1s; }
+.messages li:nth-child(2) { animation-delay: 0.2s; }
+.messages li:nth-child(3) { animation-delay: 0.3s; }
+
+.messages li::before {
+    grid-column: 1;
+    margin-top: 0.2rem;
+}
+
+/* Specific styles for error messages */
+.messages .error {
+    background-color: var(--color-dark);
+    border-left: 4px solid var(--color-error);
+    color: var(--color-light);
+}
+
+.messages .error::before {
+    content: "⚠️";
+}
+
+/* Specific styles for success messages */
+.messages .success {
+    background-color: var(--color-dark);
+    border-left: 4px solid var(--color-success);
+    color: var(--color-light);
+}
+
+.messages .success::before {
+    content: "✔️";
+}
+
+/* Specific styles for success messages */
+.messages .info {
+    background-color: var(--color-dark);
+    border-left: 4px solid var(--color-main);
+    color: var(--color-light);
+}
+
+.messages .info::before {
+    content: "ℹ️";
+}
+
+/* Container slide-in animation */
+@keyframes slideInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Individual message slide-in animation */
+@keyframes slideInItem {
+    from {
+        opacity: 0;
+        transform: translateX(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hover effect */
+.messages li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 8px rgba(229, 62, 62, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .messages {
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .messages li {
+        padding: 1.2rem 1.6rem;
+        font-size: 1.3rem;
+    }
+}
+
+/* Smooth transitions for height changes */
+.messages, .messages li {
+    transition: all 0.3s ease-in-out;
+}
